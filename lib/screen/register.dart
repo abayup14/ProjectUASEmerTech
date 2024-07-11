@@ -81,7 +81,6 @@ class _Register extends State<Register> {
                             hintText: "Enter your username here"),
                         onChanged: (v) {
                           _username = v;
-                          print(v);
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -100,7 +99,6 @@ class _Register extends State<Register> {
                             hintText: "Enter your fullname here"),
                         onChanged: (v) {
                           _fullname = v;
-                          print(v);
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -120,7 +118,6 @@ class _Register extends State<Register> {
                         obscureText: true,
                         onChanged: (v) {
                           _password = v;
-                          print(v);
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -153,7 +150,7 @@ class _Register extends State<Register> {
                             child: const Text(
                               'Register',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
+                                  TextStyle(color: Colors.black, fontSize: 25),
                             ),
                           ),
                         )),

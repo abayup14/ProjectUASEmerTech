@@ -127,8 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
       currentIndex: _currentIdx,
       fixedColor: Colors.teal,
       items: const [
-        BottomNavigationBarItem(label: "Browse", icon: Icon(Icons.home)),
-        BottomNavigationBarItem(label: "Offer", icon: Icon(Icons.search)),
+        BottomNavigationBarItem(label: "Browse", icon: Icon(Icons.list)),
+        BottomNavigationBarItem(label: "Offer", icon: Icon(Icons.list)),
         BottomNavigationBarItem(label: "Adopt", icon: Icon(Icons.history)),
       ],
       onTap: (int index) {

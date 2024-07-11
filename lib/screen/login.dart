@@ -34,7 +34,7 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   String _username = "";
   String _password = "";
-  String _user_id = "";
+  // String _user_id = "";
 
   void doLogin() async {
     final response = await http.post(
@@ -70,7 +70,7 @@ class _LoginState extends State<Login> {
                 borderRadius: const BorderRadius.all(Radius.circular(30)),
                 border: Border.all(width: 1),
                 color: Colors.white,
-                boxShadow: [const BoxShadow(blurRadius: 20)]),
+                boxShadow: const [BoxShadow(blurRadius: 20)]),
             child: Column(children: [
               Padding(
                 padding: const EdgeInsets.all(10),
@@ -81,7 +81,6 @@ class _LoginState extends State<Login> {
                       hintText: 'Please Enter Your Username'),
                   onChanged: (v) {
                     _username = v;
-                    print(v);
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -125,7 +124,7 @@ class _LoginState extends State<Login> {
                       },
                       child: const Text(
                         'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 25),
+                        style: TextStyle(color: Colors.black, fontSize: 25),
                       ),
                     ),
                   )),
@@ -143,7 +142,7 @@ class _LoginState extends State<Login> {
                       },
                       child: const Text(
                         'Register',
-                        style: TextStyle(color: Colors.white, fontSize: 25),
+                        style: TextStyle(color: Colors.black, fontSize: 25),
                       ),
                     ),
                   )),
