@@ -81,21 +81,16 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _screens = [Browse(), Offer(), Adopts()];
   final List<String> _titles = ["Browse", "Offer", "Adopt"];
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void initState() {
+    super.initState();
+    print(active_user);
+  }
 
-    void doLogout() async {
-      final prefs = await SharedPreferences.getInstance();
-      prefs.remove("user_id");
-      main();
-    }
+  void doLogout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("user_id");
+    main();
   }
 
   @override
@@ -117,8 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(_titles[_currentIdx]),
       ),
       body: _screens[_currentIdx],
-      bottomNavigationBar:
-          funBottomNavBar(), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: funBottomNavBar(),
+      drawer:
+          funDrawer(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -136,6 +132,23 @@ class _MyHomePageState extends State<MyHomePage> {
           _currentIdx = index;
         });
       },
+    );
+  }
+
+  Drawer funDrawer() {
+    return Drawer(
+      elevation: 16.0,
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            title: const Text("Logout"),
+            leading: const Icon(Icons.logout),
+            onTap: () {
+              doLogout();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

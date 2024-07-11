@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:project_uas_emer_tech/class/animal.dart';
 import 'package:project_uas_emer_tech/main.dart';
 
+
 class Offer extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -66,16 +67,17 @@ class _OfferState extends State<Offer> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                      ),
-                      offers[index].nama_hewan),
-                  Text("Deskripsi: " + offers[index].keterangan),
-                  Image.network(offers[index].foto),
-                  Text("Jenis Hewan: " + offers[index].jenis_hewan),
-                  Text("Jumlah proposal: " + offers[index].propose_count.toString()),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                    offers[index].nama_hewan),
+                Text("Deskripsi: " + offers[index].keterangan),
+                Image.network(offers[index].foto),
+                Text("Jenis Hewan: " + offers[index].jenis_hewan),
+                Text("Jumlah proposal: " +
+                    offers[index].propose_count.toString()),
               ],
             ));
           });

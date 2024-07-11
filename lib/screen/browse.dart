@@ -4,19 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_uas_emer_tech/class/animal.dart';
 import 'package:project_uas_emer_tech/screen/propose.dart';
-
-class MyBrowse extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      title: "Flutter Demo",
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const Browse(),
-      routes: {},
-    );
-  }
-}
+import 'package:project_uas_emer_tech/main.dart';
 
 class Browse extends StatefulWidget {
   const Browse({super.key});
@@ -69,25 +57,25 @@ class _Browse extends State<Browse> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                      ),
-                      listAnimal[index].nama_hewan),
+                    listAnimal[index].nama_hewan,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                  ),
                   Text("Deskripsi: " + listAnimal[index].keterangan),
                   Image.network(listAnimal[index].foto),
                   Text("Jenis Hewan: " + listAnimal[index].jenis_hewan),
-                  Text("Nama Owner:" + listAnimal[index].nama_owner),
+                  Text("Nama Owner: " + listAnimal[index].nama_owner),
                   Text("Status: " + listAnimal[index].status),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Propose(
-                                    animal_id: listAnimal[index].id,
-                                  )));
+                              builder: (context) =>
+                                  Propose(animal_id: listAnimal[index].id)));
                     },
                     child: Text(
                       'Propose',
@@ -108,13 +96,7 @@ class _Browse extends State<Browse> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: const Text("List Animal")),
-      body: ListView(
-        children: <Widget>[
-          Container(
-              height: MediaQuery.of(context).size.height,
-              child: ListAnimalBrowse(listAnimal))
-        ],
-      ),
+      body: ListAnimalBrowse(listAnimal),
     );
   }
 }
