@@ -82,8 +82,12 @@ class _Browse extends State<Browse> {
                   Text("Status: " + listAnimal[index].status),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Propose()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Propose(
+                                    animal_id: listAnimal[index].id,
+                                  )));
                     },
                     child: Text(
                       'Propose',
