@@ -79,7 +79,6 @@ class _Browse extends State<Browse> {
                     },
                     child: Text(
                       'Propose',
-                      style: TextStyle(color: Colors.black, fontSize: 20),
                     ),
                   )
                 ],

@@ -76,16 +76,16 @@ class _AdoptsState extends State<Adopts> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                      ),
-                      adopts[index].nama_hewan),
-                  Text("Deskripsi: " + adopts[index].keterangan),
-                  Image.network(adopts[index].foto),
-                  Text("Jenis Hewan: " + adopts[index].jenis_hewan),
-                  Text("Status: " + adopts[index].status2),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                    adopts[index].nama_hewan),
+                Text("Deskripsi: " + adopts[index].keterangan),
+                Image.network(adopts[index].foto),
+                Text("Jenis Hewan: " + adopts[index].jenis_hewan),
+                Text("Status: " + adopts[index].status2),
               ],
             ));
           });
@@ -129,7 +129,7 @@ class _AdoptsState extends State<Adopts> {
     return Scaffold(
       body: ListView(children: <Widget>[
         Container(
-          height: MediaQuery.of(context).size.height - 200,
+          height: MediaQuery.of(context).size.height - 100,
           child: DaftarAdopt(animals),
         ),
         // Container(

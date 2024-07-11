@@ -74,7 +74,7 @@ class _Propose extends State<Propose> {
                   if (_formKey.currentState != null &&
                       !_formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("Please input all of the text input")));
+                        content: Text("Please fill all of the text input")));
                   } else {
                     propose();
                   }
