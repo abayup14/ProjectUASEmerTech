@@ -36,6 +36,20 @@ class Animal {
         adopter_id: json["adopter_id"] as int? ?? 0,
         nama_adopter: json["nama_adopter"] as String? ?? "");
   }
+
+  factory Animal.fromJson2(Map<String, dynamic> json) {
+    return Animal(
+        id: json["id"] as int,
+        jenis_hewan: json["jenis_hewan"] as String,
+        nama_hewan: json["nama_hewan"] as String,
+        foto: json["foto"] as String,
+        keterangan: json["keterangan"] as String,
+        status: json["status"] as String? ?? "",
+        owner_id: json["owner_id"] as int? ?? 0,
+        nama_owner: json["nama_owner"] as String? ?? "",
+        adopter_id: json["adopter_id"] as int? ?? 0,
+        nama_adopter: json["nama_adopter"] as String? ?? "");
+  }
 }
 
 class Adopt {

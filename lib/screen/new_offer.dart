@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:project_uas_emer_tech/screen/offer.dart';
+import 'package:project_uas_emer_tech/main.dart';
 
 class NewOffer extends StatefulWidget {
   const NewOffer({super.key});
@@ -16,6 +21,33 @@ class _NewOffer extends State<NewOffer> {
   String _nama_hewan = "";
   String _foto = "";
   String _keterangan = "";
+
+  void addOffer() async {
+    final response = await http.post(
+        Uri.parse(
+            "https://ubaya.me/flutter/160421058/project_uas_et/new_listing.php"),
+        body: {
+          'jenis': _jenis_hewan,
+          'nama': _nama_hewan,
+          'foto': _foto,
+          'keterangan': _keterangan,
+          'owner_id': active_user.toString()
+        });
+    if (response.statusCode == 200) {
+      Map json = jsonDecode(response.body);
+      if (json["result"] == "success") {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Succesfully added data")));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Offer()));
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("error")));
+      throw Exception("Failed");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +126,9 @@ class _NewOffer extends State<NewOffer> {
                       !_formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Harap Isian diperbaiki')));
-                  } else {}
+                  } else {
+                    addOffer();
+                  }
                 },
                 child: Text('Submit'),
               ),

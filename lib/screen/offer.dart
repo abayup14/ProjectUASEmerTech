@@ -26,7 +26,7 @@ class _OfferState extends State<Offer> {
           'owner_id': active_user.toString(),
         },
       );
-      print('Response: ${response.body}');
+      // print('Response: ${response.body}');
       return response.body;
     } catch (e) {
       print('Error: $e');
@@ -75,8 +75,12 @@ class _OfferState extends State<Offer> {
                     offers[index].propose_count.toString()),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditOffer()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditOffer(
+                                  animal_id: offers[index].id,
+                                )));
                   },
                   child: Text("Edit Offer"),
                 ),
