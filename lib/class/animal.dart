@@ -119,3 +119,25 @@ class Offers {
         propose_count: json["propose_count"] as int);
   }
 }
+
+class Decisions {
+  final int id_animals;
+  final int id_adopters;
+  String description;
+  String fullname;
+
+  Decisions({
+    required this.id_animals,
+    required this.id_adopters,
+    required this.description,
+    required this.fullname
+  });
+
+  factory Decisions.fromJson(Map<String, dynamic> json) {
+    return Decisions(
+        id_animals: json["animals_id"] as int,
+        id_adopters: json["users_id"] as int,
+        description: json["description"] as String,
+        fullname: json["fullname"] as String);
+  }
+}
