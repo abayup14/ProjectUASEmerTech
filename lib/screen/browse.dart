@@ -72,10 +72,16 @@ class _Browse extends State<Browse> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Propose(animal_id: listAnimal[index].id)));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Propose(animal_id: listAnimal[index].id)))
+                          .then((_) {
+                        setState(() {
+                          listAnimal.clear();
+                          bacaData();
+                        });
+                      });
                     },
                     child: Text(
                       'Propose',

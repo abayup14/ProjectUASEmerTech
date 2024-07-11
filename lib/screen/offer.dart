@@ -63,7 +63,8 @@ class _OfferState extends State<Offer> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Decision(animal_id: offers[index].id)));
+                            builder: (context) =>
+                                Decision(animal_id: offers[index].id)));
                   },
                   child: Text(
                     textAlign: TextAlign.center,
@@ -86,7 +87,12 @@ class _OfferState extends State<Offer> {
                         MaterialPageRoute(
                             builder: (context) => EditOffer(
                                   animal_id: offers[index].id,
-                                )));
+                                ))).then((_) {
+                      setState(() {
+                        animals.clear();
+                        bacaData();
+                      });
+                    });
                   },
                   child: Text("Edit Offer"),
                 ),
@@ -122,7 +128,12 @@ class _OfferState extends State<Offer> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => NewOffer()),
-          );
+          ).then((_) {
+            setState(() {
+              animals.clear();
+              bacaData();
+            });
+          });
         },
         tooltip: 'Add New Offer',
         child: Icon(Icons.add),

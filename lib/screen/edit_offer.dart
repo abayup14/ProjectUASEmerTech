@@ -2,13 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_uas_emer_tech/class/animal.dart';
-import 'package:project_uas_emer_tech/main.dart';
 import 'package:project_uas_emer_tech/screen/offer.dart';
 
 class EditOffer extends StatefulWidget {
   final int animal_id;
-
-  EditOffer({Key? key, required this.animal_id}) : super(key: key);
+  EditOffer({super.key, required this.animal_id});
 
   @override
   State<StatefulWidget> createState() {
@@ -28,82 +26,60 @@ class _EditOffer extends State<EditOffer> {
   @override
   void initState() {
     super.initState();
-    fetchData();
+    bacaData();
   }
 
-  Future<void> fetchData() async {
-  try {
+  Future<String> fetchData() async {
     final response = await http.post(
-      Uri.parse("https://ubaya.me/flutter/160421058/project_uas_et/detail_offer.php"),
+      Uri.parse(
+          "https://ubaya.me/flutter/160421058/project_uas_et/detail_offer.php"),
       body: {'id': widget.animal_id.toString()},
     );
     if (response.statusCode == 200) {
-      Map<String, dynamic> json = jsonDecode(response.body);
-      if (json["result"] == "success" && json["data"] is List) {
-        List<dynamic> data = json["data"];
-        if (data.isNotEmpty) {
-          setState(() {
-            anm = Animal.fromJson2(data[0]);
-            _jenisHewanEdit.text = anm.jenis_hewan;
-            _namaHewanEdit.text = anm.nama_hewan;
-            _fotoHewanEdit.text = anm.foto;
-            _keteranganEdit.text = anm.keterangan;
-          });
-        } else {
-          throw Exception("No animal data found");
-        }
-      } else {
-        throw Exception("Invalid response format");
-      }
+      return response.body;
     } else {
       throw Exception("Failed to load animal details");
     }
-  } catch (e) {
-    print("Error fetching data: $e");
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("Failed to load animal details"),
-    ));
   }
-}
 
+  bacaData() {
+    fetchData().then((value) {
+      Map json = jsonDecode(value);
+      anm = Animal.fromJson2(json["data"]);
+      setState(() {
+        _namaHewanEdit.text = anm.nama_hewan;
+        _jenisHewanEdit.text = anm.jenis_hewan;
+        _fotoHewanEdit.text = anm.foto;
+        _keteranganEdit.text = anm.keterangan;
+      });
+    });
+  }
 
   void editOffer() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        final response = await http.post(
-          Uri.parse(
-              "https://ubaya.me/flutter/160421058/project_uas_et/edit_offer.php"),
-          body: {
-            'animal_id': widget.animal_id.toString(),
-            'jenis': _jenisHewanEdit.text,
-            'nama': _namaHewanEdit.text,
-            'foto': _fotoHewanEdit.text,
-            'keterangan': _keteranganEdit.text,
-          },
-        );
-        if (response.statusCode == 200) {
-          Map<String, dynamic> json = jsonDecode(response.body);
-          if (json["result"] == "success") {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text("Successfully edited data"),
-            ));
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => Offer()),
-            );
-          } else {
-            throw Exception("Failed to edit data: ${json['message']}");
-          }
-        } else {
-          throw Exception("Failed to edit data");
-        }
-      } catch (e) {
-        print("Error editing data: $e");
+    final response = await http.post(
+      Uri.parse(
+          "https://ubaya.me/flutter/160421058/project_uas_et/edit_offer.php"),
+      body: {
+        'animal_id': widget.animal_id.toString(),
+        'jenis': _jenisHewanEdit.text,
+        'nama': _namaHewanEdit.text,
+        'foto': _fotoHewanEdit.text,
+        'keterangan': _keteranganEdit.text,
+      },
+    );
+    if (response.statusCode == 200) {
+      Map json = jsonDecode(response.body);
+      if (json["result"] == "success") {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Failed to edit data"),
+          content: Text("Successfully edited data"),
         ));
+        Navigator.pop(context);
+      } else {
+        throw Exception("Failed to edit data");
       }
     }
+    ;
   }
 
   @override
