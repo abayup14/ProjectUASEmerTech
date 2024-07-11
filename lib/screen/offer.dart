@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:project_uas_emer_tech/class/animal.dart';
 import 'package:project_uas_emer_tech/main.dart';
+import 'package:project_uas_emer_tech/screen/decision.dart';
 import 'package:project_uas_emer_tech/screen/edit_offer.dart';
 import 'package:project_uas_emer_tech/screen/new_offer.dart';
 
@@ -58,7 +59,12 @@ class _OfferState extends State<Offer> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Decision(animal_id: offers[index].id)));
+                  },
                   child: Text(
                     textAlign: TextAlign.center,
                     style: const TextStyle(
