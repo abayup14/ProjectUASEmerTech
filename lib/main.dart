@@ -78,7 +78,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _currentIdx = 0;
-  final List<Widget> _screens = [Browse(), Offer(), Adopt()];
+  final List<Widget> _screens = [Browse(), Offer(), Adopts()];
   final List<String> _titles = ["Browse", "Offer", "Adopt"];
 
   void _incrementCounter() {

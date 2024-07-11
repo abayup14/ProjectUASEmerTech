@@ -18,7 +18,7 @@ class _Propose extends State<Propose> {
       appBar: AppBar(
         title: const Text("Propose To Your Favorite Animal"),
       ),
-      body: ,
+      // body: ,
     );
   }
 }

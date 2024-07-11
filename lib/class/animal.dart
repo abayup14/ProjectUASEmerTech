@@ -37,3 +37,71 @@ class Animal {
         nama_adopter: json["nama_adopter"] as String? ?? "");
   }
 }
+
+class Adopt {
+  final int id;
+  String jenis_hewan;
+  String nama_hewan;
+  String foto;
+  String keterangan;
+  String status;
+  int owner_id;
+  int adopter_id;
+  String status2;
+
+  Adopt({
+    required this.id,
+    required this.jenis_hewan,
+    required this.nama_hewan,
+    required this.foto,
+    required this.keterangan,
+    required this.status,
+    required this.owner_id,
+    required this.adopter_id,
+    required this.status2,
+  });
+
+  factory Adopt.fromJson(Map<String, dynamic> json) {
+    return Adopt(
+        id: json["id"] as int,
+        jenis_hewan: json["jenis_hewan"] as String,
+        nama_hewan: json["nama_hewan"] as String,
+        foto: json["foto"] as String,
+        keterangan: json["keterangan"] as String,
+        status: json["status"] as String,
+        owner_id: json["owner_id"] as int,
+        adopter_id: json["adopter_id"] as int,
+        status2: json["status2"] as String);
+  }
+}
+
+class Offers {
+  final int id;
+  String jenis_hewan;
+  String nama_hewan;
+  String foto;
+  String keterangan;
+  String status;
+  int propose_count;
+
+  Offers({
+    required this.id,
+    required this.jenis_hewan,
+    required this.nama_hewan,
+    required this.foto,
+    required this.keterangan,
+    required this.status,
+    required this.propose_count,
+  });
+
+  factory Offers.fromJson(Map<String, dynamic> json) {
+    return Offers(
+        id: json["id"] as int,
+        jenis_hewan: json["jenis_hewan"] as String,
+        nama_hewan: json["nama_hewan"] as String,
+        foto: json["foto"] as String,
+        keterangan: json["keterangan"] as String,
+        status: json["status"] as String,
+        propose_count: json["propose_count"] as int);
+  }
+}
