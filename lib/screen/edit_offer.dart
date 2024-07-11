@@ -32,31 +32,40 @@ class _EditOffer extends State<EditOffer> {
   }
 
   Future<void> fetchData() async {
-    try {
-      final response = await http.post(
-        Uri.parse(
-            "https://ubaya.me/flutter/160421058/project_uas_et/detail_offer.php"),
-        body: {'id': widget.animal_id.toString()},
-      );
-      if (response.statusCode == 200) {
-        Map<String, dynamic> json = jsonDecode(response.body);
-        setState(() {
-          anm = Animal.fromJson2(json['data']);
-          _jenisHewanEdit.text = anm.jenis_hewan;
-          _namaHewanEdit.text = anm.nama_hewan;
-          _fotoHewanEdit.text = anm.foto;
-          _keteranganEdit.text = anm.keterangan;
-        });
+  try {
+    final response = await http.post(
+      Uri.parse("https://ubaya.me/flutter/160421058/project_uas_et/detail_offer.php"),
+      body: {'id': widget.animal_id.toString()},
+    );
+    if (response.statusCode == 200) {
+      Map<String, dynamic> json = jsonDecode(response.body);
+      if (json["result"] == "success" && json["data"] is List) {
+        List<dynamic> data = json["data"];
+        if (data.isNotEmpty) {
+          setState(() {
+            anm = Animal.fromJson2(data[0]);
+            _jenisHewanEdit.text = anm.jenis_hewan;
+            _namaHewanEdit.text = anm.nama_hewan;
+            _fotoHewanEdit.text = anm.foto;
+            _keteranganEdit.text = anm.keterangan;
+          });
+        } else {
+          throw Exception("No animal data found");
+        }
       } else {
-        throw Exception("Failed to load animal details");
+        throw Exception("Invalid response format");
       }
-    } catch (e) {
-      print("Error fetching data: $e");
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Failed to load animal details"),
-      ));
+    } else {
+      throw Exception("Failed to load animal details");
     }
+  } catch (e) {
+    print("Error fetching data: $e");
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Failed to load animal details"),
+    ));
   }
+}
+
 
   void editOffer() async {
     if (_formKey.currentState!.validate()) {
