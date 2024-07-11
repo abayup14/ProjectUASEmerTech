@@ -35,7 +35,7 @@ class _Propose extends State<Propose> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Succesfully proposed to the animal owner")));
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyApp()));
+            context, MaterialPageRoute(builder: (context) => Browse()));
       }
     }
   }
